@@ -28,6 +28,9 @@ importers:
       '@adonisjs/shield':
         specifier: ^9.0.0
         version: 9.0.0(34fb45bf4728a24563bb525e429ca5a1)
+      '@ai-shop/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
       '@japa/api-client':
         specifier: ^3.2.1
         version: 3.2.1(@japa/assert@4.2.0(@japa/runner@5.3.0))(@japa/runner@5.3.0)
@@ -95,6 +98,19 @@ importers:
       youch:
         specifier: ^4.1.1
         version: 4.1.1
+
+  packages/contracts:
+    dependencies:
+      zod:
+        specifier: ^4.1.13
+        version: 4.4.3
+    devDependencies:
+      prettier:
+        specifier: ^3.8.3
+        version: 3.8.3
+      typescript:
+        specifier: ~6.0.2
+        version: 6.0.3
 
 packages:
 
@@ -2482,6 +2498,9 @@ packages:
   youch@4.1.1:
     resolution: {integrity: sha512-mxW3qiSnl+GRxXsaUMzv2Mbada1Y8CDltET9UxejDQe6DBYlSekghl5U5K0ReAikcHDi0G1vKZEmmo/NWAGKLA==}
 
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+
 snapshots:
 
   '@adobe/css-tools@4.4.4': {}
@@ -4726,3 +4745,5 @@ snapshots:
       '@speed-highlight/core': 1.2.15
       cookie-es: 3.1.1
       youch-core: 0.3.3
+
+  zod@4.4.3: {}

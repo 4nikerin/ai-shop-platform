@@ -6,6 +6,260 @@
 
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
+import type { OrderItemProductAttributeSnapshot } from '#types/order'
+
+export class ChatMessageSchema extends BaseModel {
+  static $columns = ['chatId', 'content', 'createdAt', 'id', 'role'] as const
+  $columns = ChatMessageSchema.$columns
+  @column()
+  declare chatId: number
+  @column()
+  declare content: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare role: 'user' | 'assistant'
+}
+
+export class ChatSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'title', 'updatedAt', 'userId'] as const
+  $columns = ChatSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare title: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class OrderItemSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'id',
+    'lineTotalCents',
+    'orderId',
+    'productAttributesSnapshot',
+    'productId',
+    'productName',
+    'quantity',
+    'unitPriceCents',
+    'updatedAt',
+  ] as const
+  $columns = OrderItemSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare lineTotalCents: number
+  @column()
+  declare orderId: number
+  @column()
+  declare productAttributesSnapshot: OrderItemProductAttributeSnapshot
+  @column()
+  declare productId: number
+  @column()
+  declare productName: string
+  @column()
+  declare quantity: number
+  @column()
+  declare unitPriceCents: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class OrderSchema extends BaseModel {
+  static $columns = [
+    'comment',
+    'createdAt',
+    'currency',
+    'customerEmail',
+    'customerName',
+    'customerPhone',
+    'deliveryAddress',
+    'id',
+    'status',
+    'totalCents',
+    'updatedAt',
+    'userId',
+  ] as const
+  $columns = OrderSchema.$columns
+  @column()
+  declare comment: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare currency: 'USD'
+  @column()
+  declare customerEmail: string
+  @column()
+  declare customerName: string
+  @column()
+  declare customerPhone: string
+  @column()
+  declare deliveryAddress: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare status: 'new' | 'processing' | 'completed' | 'cancelled'
+  @column()
+  declare totalCents: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class ProductAttributeOptionSchema extends BaseModel {
+  static $columns = [
+    'attributeId',
+    'createdAt',
+    'id',
+    'label',
+    'position',
+    'updatedAt',
+    'value',
+  ] as const
+  $columns = ProductAttributeOptionSchema.$columns
+  @column()
+  declare attributeId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare label: string
+  @column()
+  declare position: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare value: string
+}
+
+export class ProductAttributeValueSchema extends BaseModel {
+  static $columns = [
+    'attributeId',
+    'booleanValue',
+    'createdAt',
+    'id',
+    'numberValue',
+    'optionId',
+    'productId',
+    'textValue',
+    'updatedAt',
+  ] as const
+  $columns = ProductAttributeValueSchema.$columns
+  @column()
+  declare attributeId: number
+  @column()
+  declare booleanValue: boolean | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare numberValue: number | null
+  @column()
+  declare optionId: number | null
+  @column()
+  declare productId: number
+  @column()
+  declare textValue: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class ProductAttributeSchema extends BaseModel {
+  static $columns = [
+    'code',
+    'createdAt',
+    'id',
+    'name',
+    'position',
+    'type',
+    'unit',
+    'updatedAt',
+  ] as const
+  $columns = ProductAttributeSchema.$columns
+  @column()
+  declare code: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare position: number
+  @column()
+  declare type: 'text' | 'number' | 'boolean' | 'select'
+  @column()
+  declare unit: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class ProductImageSchema extends BaseModel {
+  static $columns = ['alt', 'createdAt', 'id', 'position', 'productId', 'updatedAt', 'url'] as const
+  $columns = ProductImageSchema.$columns
+  @column()
+  declare alt: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare position: number
+  @column()
+  declare productId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare url: string
+}
+
+export class ProductSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'currency',
+    'description',
+    'id',
+    'name',
+    'priceCents',
+    'slug',
+    'status',
+    'stock',
+    'updatedAt',
+  ] as const
+  $columns = ProductSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare currency: 'USD'
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare priceCents: number
+  @column()
+  declare slug: string
+  @column()
+  declare status: 'draft' | 'active' | 'archived'
+  @column()
+  declare stock: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
 
 export class UserSchema extends BaseModel {
   static $columns = [
